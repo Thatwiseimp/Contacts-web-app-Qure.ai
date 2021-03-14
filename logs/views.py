@@ -10,6 +10,7 @@ from rest_framework import viewsets, status
 # from rest_framework import permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -87,3 +88,16 @@ def index(request):
 
     return render(request, 'index.html', context)
     # return render(request, 'index.html')
+
+
+
+def people_list(request):
+    # data = {
+    #     "values": [ i for i in People.objects.all()]
+    # }
+    value = People.objects.all()
+    my_serializer = PeopleSerializer(data=value, many=True)
+    if my_serializer.is_valid():
+        return JsonResponse(my_serializer.data, status=200)
+    # return JsonResponse(my_serializer.errors, status=400)
+    return JsonResponse(my_serializer.data, safe=False, status=200)
