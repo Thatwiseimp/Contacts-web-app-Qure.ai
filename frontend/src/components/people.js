@@ -101,24 +101,31 @@ import { ButtonGroup } from "@material-ui/core";
 
 
 
-export default
 
-
-
-
+class SearchBar extends Component {
+  render(){
+    return(
+      <div>
+        <input onChange={this.props.seacher}/>
+      </div>
+    )
+  }
+}
 
 export default class People extends Component {
   constructor(props){
     super(props);
     this.state ={
-      people : []
+      people : [],
+      search_list : [],
+      search_term : '',
     }
   }
 
-  renderPerson(value){
-    return(
-      <li>{value.name}</li>
-    )
+  renderPerson(lst){
+    for (let i=0; i<lst.length; i++){
+      return (lst.map((key) => (<li>{key.name}</li>)))
+    }
   }
 
   componentDidMount(){
@@ -126,27 +133,39 @@ export default class People extends Component {
     let my_list = [];
     fetch('http://localhost:8000/logs/people_list', ).then((response) => response.json()).then((data) => {
       for (let i=0; i<data.length; i++){
-        my_list.push(this.renderPerson(data[i]));
+        my_list.push(data[i]);
       }
       this.setState({
-        people: my_list
+        people: my_list,
+        search_list: my_list
       })
-      console.log(data);
-      console.log(this.state.people);
+      // console.log(data);
+      // console.log(this.state.people);
     })
+  }
+
+  // update_search(){
+  //
+  // }
+
+  searcher = (e) => {
+    this.setState({
+      search_term: e.target.value
+    })
+    this.update_search();
   }
 
 
   render(){
 
-    console.log(this.state.people);
+    // console.log(this.state.people);
 
     return(
       <div className="People">
+        <SearchBar value={this.state.searchterm} searcher={this.searcher} placeholder="search me"/>
         <p>hiii</p>
-        <SearchBar />
         <ul>
-          {this.state.people}
+          {this.renderPerson(this.state.search_list)}
         </ul>
         <p>adsfsfsd</p>
       </div>
