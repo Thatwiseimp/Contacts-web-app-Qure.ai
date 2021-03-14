@@ -106,7 +106,7 @@ class SearchBar extends Component {
   render(){
     return(
       <div>
-        <input onChange={this.props.seacher}/>
+        <input onChange={this.props.onChange}/>
       </div>
     )
   }
@@ -140,15 +140,20 @@ export default class People extends Component {
         search_list: my_list
       })
       // console.log(data);
-      // console.log(this.state.people);
+      console.log(this.state.search_list);
     })
   }
 
-  // update_search(){
-  //
-  // }
+  update_search(){
+    let searched_list = this.state.people.filter(person => (person.name).toLowerCase().includes(this.state.search_term.toLowerCase()))
+    this.setState({
+      search_list: searched_list
+    })
+    console.log(this.state.search_list);
+  }
 
   searcher = (e) => {
+    console.log(e.target.value);
     this.setState({
       search_term: e.target.value
     })
@@ -162,7 +167,7 @@ export default class People extends Component {
 
     return(
       <div className="People">
-        <SearchBar value={this.state.searchterm} searcher={this.searcher} placeholder="search me"/>
+        <SearchBar value={this.state.searchterm} onChange={this.searcher} placeholder="search me"/>
         <p>hiii</p>
         <ul>
           {this.renderPerson(this.state.search_list)}
