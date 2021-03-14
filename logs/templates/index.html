@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/6b20b1c14d.js" crossorigin="anonymous"></script>
+
+	<title>Contact Form</title>
+</head>
+<body>
+
+	<div class="container">
+		<!--  SEARCH FORM -->
+		<header class="header">
+			
+			<form class="search-bar">
+				<input type="search-name" class="contact-search" name="search-area" placeholder="Search">
+			</form>
+
+			<!--  ADD-CONTACT BUTTON/ICON -->
+			<a href="edit.html"><i class="fas fa-plus-circle add"></i></a>
+		</header>
+		<!--  CONTACT LIST -->
+		<section class="contacts-library">
+			<table style="width:100%">
+				  <tr>
+					<th>Name</th>
+					<th>Phone</th>
+				  </tr>
+					{% for person in persons %}
+				<tr>
+					<th>{{ person.name }}</th>
+					<th>{{ person.phone_number }}</th>
+				</tr>
+							{% endfor %}
+						</table>
+
+
+			<ul class="contacts-list">
+			</ul>
+		</section>
+	</div>
+
+</body>
+</html>
