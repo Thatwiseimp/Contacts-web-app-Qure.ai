@@ -1,0 +1,19 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+<h1>YourFeed</h1>
+<h2>{{ user }}</h2>
+<form action="/add_feed" method="get" id="post-form">
+       {% csrf_token %}
+    {{ addfeedform.as_p }}
+    <input type="submit" value="add feed">
+</form>
+    <script src="{% static 'js/addfeed.js' %}"></script>
+</body>
+</html>
