@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { render } from "react-dom";
-import Home from "./home";
-import PropTypes from 'prop-types'
+import People from "./people";
 
 
 export default class App extends Component {
@@ -11,9 +10,8 @@ export default class App extends Component {
 
   render() {
     return (
-      <div >
-        rfty
-        <Home></Home>
+      <div>
+        <People></People>
       </div>
     );
   }

@@ -1,0 +1,22 @@
+
+{% load static %}
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+     <link rel="stylesheet" type="text/css" href="{% static 'logs/js/style.css' %}">
+    </head>
+    <body>
+
+        <form class= 'form section'>
+            <label for="name">name:</label><br>
+            <input type="text" id="name" name="name"><br>
+            <label for="phone_number">phone number:</label><br>
+            <input type="number" id="number" name="phone_number"><br>
+            <input id="bar" type="submit" value="Submit" onclick='return add(this.form)'>
+        </form>
+        <script src="{% static 'logs/js/poster.js' %}"></script>
+
+    </body>
+</html>

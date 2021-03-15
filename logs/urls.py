@@ -1,6 +1,8 @@
 from django.urls import path, include
 from . import views
 from rest_framework import routers
+# from views 
+
 # from .views import people_list
 
 router = routers.DefaultRouter()
@@ -8,8 +10,9 @@ router = routers.DefaultRouter()
 
 urlpatterns =[
     path('upload/', views.upload, name='upload'),
-    # path('add/',views.AddPeopleView),
+    path('add/call',views.AddPeopleView.as_view()),
+    path('add/', views.addform),
     path('people/',include(router.urls)),
-    path('', views.index, name='index'),
+    path('signup/', views.signup, name='signup'),
     path('people_list', views.people_list, name="people_list")
 ]

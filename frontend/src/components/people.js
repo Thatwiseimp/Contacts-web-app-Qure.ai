@@ -1,20 +1,12 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import { Link, Redirect } from "react-router-dom";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { ButtonGroup } from "@material-ui/core";
-
 
 class SearchBar extends Component {
   render(){
     return(
-      <div>
-        <input onChange={this.props.onChange}/>
+      <div className='search'>
+        <input placeholder='Search' onChange={this.props.onChange}/>
+        <button onclick="location.href'http://localhost:8000/logs/add/call';" id="Button" class="float-left submit-button" >Add!</button>
+
       </div>
     )
   }
@@ -32,7 +24,7 @@ export default class People extends Component {
 
   renderPerson(lst){
     for (let i=0; i<lst.length; i++){
-      return (lst.map((key) => (<li>{key.name}</li>)))
+      return (lst.map((key) => (<li>{key.name} / {key.phone_number}</li>)))
     }
   }
 
@@ -76,11 +68,11 @@ export default class People extends Component {
     return(
       <div className="People">
         <SearchBar value={this.state.searchterm} onChange={this.searcher} placeholder="search me"/>
-        <p>hiii</p>
-        <ul>
-          {this.renderPerson(this.state.search_list)}
-        </ul>
-        <p>adsfsfsd</p>
+        <div>
+          <ul>
+            {this.renderPerson(this.state.search_list)}
+          </ul>
+        </div>
       </div>
     )
   }
