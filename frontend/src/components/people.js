@@ -5,7 +5,7 @@ class SearchBar extends Component {
     return(
       <div className='search'>
         <input placeholder='Search' onChange={this.props.onChange}/>
-        <button onclick="location.href'http://localhost:8000/logs/add/call';" id="Button" class="float-left submit-button" >Add!</button>
+//        <button onclick="location.href'http://localhost:8000/logs/add/call';" id="Button" class="float-left submit-button" >Add!</button>
 
       </div>
     )

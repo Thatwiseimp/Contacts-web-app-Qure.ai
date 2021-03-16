@@ -1,7 +1,7 @@
-{% extends 'signupindex.html' %}
+{% extends 'registration/signupindex.html' %}
 
 {% block content %}
-  <h2>Sign up</h2>
+  <h2>Login</h2>
   <form method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -16,6 +16,8 @@
         {% endfor %}
       </p>
     {% endfor %}
-    <button type="submit">Sign up</button>
+    <button type="submit">Login</button>
+
+	  <a href="/sign_up">signup?</a>
   </form>
 {% endblock %}

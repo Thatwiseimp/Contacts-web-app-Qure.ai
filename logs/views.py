@@ -10,6 +10,7 @@ from rest_framework import viewsets, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
@@ -29,6 +30,21 @@ from django.forms import ModelForm
 #         }
 
 #         return render(request, 'index.html', context)
+
+
+
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.views.generic import View
+
+
+def superuser_required():
+    def wrapper(wrapped):
+        class WrappedClass(UserPassesTestMixin, wrapped):
+            def test_func(self):
+                return self.request.user.is_superuser
+
+        return WrappedClass
+    return wrapper
 
 class AddPeopleView(APIView):
     serializer_class = AddPeopleSerializer
@@ -54,11 +70,6 @@ class AddPeopleView(APIView):
                 return Response(PeopleSerializer(people).data, status=status.HTTP_201_CREATED)
 
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-
-
 
 
 def upload(request):
@@ -87,6 +98,7 @@ def upload(request):
 
     return HttpResponse("uploaded")
 
+
 def index(request):
     data = People.objects.all()
     print([[i.name, i.phone_number] for i in data])
@@ -97,7 +109,6 @@ def index(request):
 
     return render(request, 'index.html', context)
     # return render(request, 'index.html')
-
 
 
 def people_list(request):
@@ -127,7 +138,7 @@ def signup(request):
             return redirect('/people ')
     else:
         form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'sign_up.html', {'form': form})
 
 
 def addform(request):
@@ -146,4 +157,4 @@ def addform(request):
 #             return redirect('index')
 #     else:
 #         form = UserCreationForm()
-#     return render(request, 'signup.html', {'form': form})
+#     return render(request, 'sign_up.html', {'form': form})
